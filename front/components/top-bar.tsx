@@ -22,6 +22,12 @@ const Li = styled.li`
 
 const FirstLi = styled.li`
   display: inline-block;
+  font-size: 3em;
+  float: left;
+  position: relative;
+  top: -0.46em;
+  color: #222;
+  text-shadow: -1px -1px 1px #181818;
 `;
 
 const links: { [key: string]: string } = {};
@@ -35,18 +41,17 @@ const Entry = (props: {
   path: string;
   index: number;
 }) => {
-  const { name, href, path, index } = props;
+  const { name, href, path } = props;
 
-  const Outer = index === 0 ? FirstLi : Li;
   const className = href === path ?
     "active route" :
     "route";
 
-  return (<Outer>
+  return (<Li>
     <Link {...{className, href}}>
       {name}
     </Link>
-  </Outer>);
+  </Li>);
 };
 
 const TopBar = () => {
@@ -54,10 +59,11 @@ const TopBar = () => {
 
   return (<Section>
     <Ul>
+    <FirstLi>»</FirstLi>
       { Object.keys(links).map(
         (name, index) => <Entry
           key={`top-menu-${index}`}
-          {...{ name, href: links[name], path, index }}
+          {...{ name, href: links[name], path }}
         />)}
     </Ul>
   </Section>);
