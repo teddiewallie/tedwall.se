@@ -24,13 +24,19 @@ const FirstLi = styled.li`
   display: inline-block;
 `;
 
-const Links = {
-  Home: '/',
-  Blog: '/blog',
-  Styleguide: '/styleguide'
-};
+const links: { [key: string]: string } = {};
+links.Home = '/';
+links.Blog = '/blog';
+links.Styleguide = '/styleguide';
 
-const Entry = ({name, href, path, index}) => {
+const Entry = (props: {
+  name: string;
+  href: string;
+  path: string;
+  index: number;
+}) => {
+  const { name, href, path, index } = props;
+
   const Outer = index === 0 ? FirstLi : Li;
   const className = href === path ?
     "active route" :
@@ -45,14 +51,14 @@ const Entry = ({name, href, path, index}) => {
 
 const TopBar = () => {
   const path = usePathname();
+
   return (<Section>
     <Ul>
-      { Object.keys(Links).map(
+      { Object.keys(links).map(
         (name, index) => <Entry
           key={`top-menu-${index}`}
-          {...{ name, href: Links[name], path, index }}
-        />
-      )}
+          {...{ name, href: links[name], path, index }}
+        />)}
     </Ul>
   </Section>);
 };
