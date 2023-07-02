@@ -5,7 +5,7 @@ const Styleguide = () => (
   <>
     <TopBar />
     <Sidebar />
-    <p>styleguide</p>
+    <p>Nothing yet...</p>
   </>
 );
 

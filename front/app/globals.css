@@ -9,3 +9,16 @@ a {
   color: #acf;
 }
 
+.route, .active {
+  font-variant: small-caps;
+  text-shadow: 1px 1px 1px #000;
+}
+
+.route {
+  color: #aaa;
+}
+
+.active {
+  color: #eee;
+}
+

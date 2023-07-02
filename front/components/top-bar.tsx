@@ -2,13 +2,11 @@
 
 import Link from 'next/link';
 import styled from 'styled-components';
+import { usePathname } from 'next/navigation';
 
 const Section = styled.section`
-  border-bottom: 1px solid #444;
-`;
-
-const Caps = styled.span`
-  text-transform: small-caps;
+  background-color: #252525;
+  border-bottom: 1px solid #343434;
 `;
 
 const Ul = styled.ul`
@@ -28,26 +26,36 @@ const FirstLi = styled.li`
 
 const Links = {
   Home: '/',
+  Blog: '/blog',
   Styleguide: '/styleguide'
 };
 
-const Entry = ({name, href, index}) => {
+const Entry = ({name, href, path, index}) => {
   const Outer = index === 0 ? FirstLi : Li;
-  return (<Outer><Link {...{href}}><Caps>{name}</Caps></Link></Outer>);
+  const className = href === path ?
+    "active route" :
+    "route";
+
+  return (<Outer>
+    <Link {...{className, href}}>
+      {name}
+    </Link>
+  </Outer>);
 };
 
-const TopBar = () => (
-  <Section>
+const TopBar = () => {
+  const path = usePathname();
+  return (<Section>
     <Ul>
       { Object.keys(Links).map(
         (name, index) => <Entry
           key={`top-menu-${index}`}
-          {...{name, href: Links[name], index} }
+          {...{ name, href: Links[name], path, index }}
         />
       )}
     </Ul>
-  </Section>
-);
+  </Section>);
+};
 
 export default TopBar;
 
