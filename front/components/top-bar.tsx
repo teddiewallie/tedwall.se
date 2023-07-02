@@ -39,7 +39,6 @@ const Entry = (props: {
   name: string;
   href: string;
   path: string;
-  index: number;
 }) => {
   const { name, href, path } = props;
 
