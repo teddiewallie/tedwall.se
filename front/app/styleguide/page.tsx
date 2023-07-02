@@ -1,11 +1,13 @@
 import Sidebar from '../../components/sidebar';
+import TopBar from '../../components/top-bar';
 
-const StyleGuide = () => (
+const Styleguide = () => (
   <>
+    <TopBar />
     <Sidebar />
     <p>styleguide</p>
   </>
 );
 
-export default StyleGuide;
+export default Styleguide;
 

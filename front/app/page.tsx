@@ -1,5 +1,10 @@
+import TopBar from '../components/top-bar';
+
 const Home = () => (
-  <p className="nothing">Nothing yet...</p>
+  <>
+    <TopBar />
+    <p className="nothing">Nothing yet...</p>
+  </>
 );
 
 export default Home;
