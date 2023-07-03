@@ -11,7 +11,6 @@ const Outer = styled.section`
   user-select: none;
   transition: background-color 0.1s ease-in;
 
-
   &:hover {
     background-color: rgba(0,0,0,0.2);
   }
