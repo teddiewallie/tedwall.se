@@ -28,9 +28,10 @@ const Entry = (props: {
 }) => {
   const { name, href, path } = props;
 
-  const className = href === path ?
-    "active route" :
-    "route";
+  let className = 'route';
+  className = href === path ? `${className} active` : className;
+  className = href.includes('styleguide') && path.includes('styleguide') ? `${className} active` : className;
+  className = href.includes('blog') && path.includes('blog') ? `${className} active` : className;
 
   return (<Li>
     <Link {...{className, href}}>
