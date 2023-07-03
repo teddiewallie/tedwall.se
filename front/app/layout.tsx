@@ -1,6 +1,7 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import StyledComponentsRegistry from '../lib/styled-registry';
+import Topbar from './topbar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,6 +19,7 @@ const RootLayout = ({
     <html lang="en">
       <body className={inter.className}>
         <StyledComponentsRegistry>
+          <Topbar />
           {children}
         </StyledComponentsRegistry>
       </body>

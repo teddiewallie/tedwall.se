@@ -1,9 +1,6 @@
-import TopBar from '../components/top-bar';
-
 const Home = () => (
   <>
-    <TopBar />
-    <p className="nothing">Nothing yet...</p>
+    <p className="nothing">Continuous Deployment and all that. It'll be a website sometime in the future.</p>
   </>
 );
 
