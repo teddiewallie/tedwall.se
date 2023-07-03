@@ -33,7 +33,7 @@ const SidebarItem = (props: {
 
   return (<Link {...{href}}>
     <OuterFirst>
-      {name}<Right>></Right>
+      {name}<Right>{'>'}</Right>
     </OuterFirst>
   </Link>);
 };

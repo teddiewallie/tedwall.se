@@ -8,7 +8,9 @@ const Wrapper = styled.section`
   margin-left: 16em;
 `;
 
-const Layout = (props: { children: object }) => {
+const Layout = (props: {
+  children: React.ReactNode
+}) => {
   const { children } = props;
   return (
     <>

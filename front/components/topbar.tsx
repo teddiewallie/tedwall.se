@@ -46,19 +46,19 @@ const Entry = (props: {
   </Li>);
 };
 
-const TopBar = (props: { links: array }) => {
+const TopBar = (props: { links: object }) => {
   const { links } = props;
   console.log(links);
   const path = usePathname();
 
-  return (<Section>
+  const Entries = Object.entries(links).map(([name, href], index) => (
+    <Entry key={`top-menu-${index}`} {...{name, href, path}} />
+  ));
+
+  return(<Section>
     <Ul>
-    <FirstLi>></FirstLi>
-      { Object.keys(links).map(
-        (name, index) => <Entry
-          key={`top-menu-${index}`}
-          {...{ name, href: links[name], path }}
-        />)}
+      <FirstLi>{'>'}</FirstLi>
+      {...Entries}
     </Ul>
   </Section>);
 };

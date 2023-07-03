@@ -17,10 +17,12 @@ const Sidebar = (props: {
 }) => {
   const { items } = props;
 
+  const SidebarItems = Object.entries(items).map(([name, href], index) => {
+    return (<SidebarItem key={`sidebar-${index}`} {...{name, href}} />);
+  });
+
   return (<Section>
-    { Object.keys(items).map(
-      (name: string) => <SidebarItem {...{ name, href: items[name] }}/>
-    )}
+    { ...SidebarItems }
   </Section>);
 };
 
