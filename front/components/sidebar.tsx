@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import SidebarItem from './sidebar-item';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const sectionWidth = '14em';
 
@@ -42,7 +42,11 @@ const Sidebar = (props: {
   items: object
 }) => {
   const { items } = props;
-  const [ isHidden, setHidden ] = useState(false);
+  const [ isHidden, setHidden ] = useState(JSON.parse(localStorage.getItem('sidebar-is-hidden')) || false);
+
+  useEffect(() => {
+    localStorage.setItem('sidebar-is-hidden', JSON.stringify(isHidden));
+  }, [isHidden]);
 
   const SidebarItems = Object.entries(items).map(([name, href], index) => {
     return (<SidebarItem key={`sidebar-${index}`} {...{name, href}} />);
