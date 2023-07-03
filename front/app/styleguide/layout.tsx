@@ -4,8 +4,11 @@ import Sidebar from './styleguide-sidebar';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-  margin-top: 2em;
-  margin-left: 16em;
+  display: flex;
+`;
+
+const Content = styled.section`
+  margin: 2em;
 `;
 
 const Layout = (props: {
@@ -13,12 +16,12 @@ const Layout = (props: {
 }) => {
   const { children } = props;
   return (
-    <>
+    <Wrapper>
       <Sidebar />
-      <Wrapper>
+      <Content>
         {children}
-      </Wrapper>
-    </>
+      </Content>
+    </Wrapper>
   );
 };
 
