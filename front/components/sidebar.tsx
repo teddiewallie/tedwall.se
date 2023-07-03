@@ -35,7 +35,7 @@ const Toggle = styled.button`
 
 const HiddenToggle = styled(Toggle)`
   position: absolute;
-  right: auto;
+  left: 0;
 `;
 
 const Sidebar = (props: {
