@@ -23,6 +23,7 @@ const Ul = styled.ul`
 `;
 
 const Li = styled.li`
+  white-space: nowrap;
 `;
 
 const Entry = (props: {
