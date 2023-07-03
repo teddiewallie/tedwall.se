@@ -9,6 +9,10 @@ a {
   color: #ccc;
 }
 
+.default-margin {
+  margin: 2em;
+}
+
 .route {
   font-variant: small-caps;
   text-shadow: 1px 1px 1px #000;
