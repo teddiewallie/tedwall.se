@@ -4,7 +4,10 @@ import styled from 'styled-components';
 import SidebarItem from './sidebar-item';
 import { useState } from 'react';
 
+const sectionWidth = '14em';
+
 const Section = styled.section`
+  width: ${sectionWidth};
   height: calc(100vh - 3.3em);
   position: relative;
   background-color: #252525;
@@ -23,7 +26,7 @@ const Toggle = styled.button`
   border-bottom: 1px solid #343434;
   background-color: #252525;
   position: absolute;
-  left: 100%;
+  left: calc(${sectionWidth} - 2.3em);
   font-size: 1.2em;
   padding: 0 0.5em;
   color: #ccc;
