@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import styled from 'styled-components';
+import { usePathname } from 'next/navigation';
 
 const Outer = styled.section`
   width: 10em;
@@ -16,6 +17,10 @@ const Outer = styled.section`
   }
 `;
 
+const OuterActive = styled(Outer)`
+  background-color: rgba(0,0,0,0.2);
+`;
+
 const Right = styled.span`
   float: right;
 `;
@@ -25,11 +30,13 @@ const SidebarItem = (props: {
   href: string;
 }) => {
   const { name, href } = props;
+  const path = usePathname();
+  const Wrapper = path.includes(href) ? OuterActive : Outer;
 
   return (<Link {...{href}}>
-    <Outer>
+    <Wrapper>
       {name}<Right>{'>'}</Right>
-    </Outer>
+    </Wrapper>
   </Link>);
 };
 
