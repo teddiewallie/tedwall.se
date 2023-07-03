@@ -11,14 +11,18 @@ const Section = styled.section`
 `;
 
 const Ul = styled.ul`
+  display: flex; 
+  flex-direction: row;
+  flex-wrap: nowrap;
   list-style-type: none;
   margin: 0;
+  gap: 1.4em;
   padding: 1em;
+  padding-left: 2em;
+  overflow-x: scroll;
 `;
 
 const Li = styled.li`
-  display: inline-block;
-  margin-left: 1.4em;
 `;
 
 const Entry = (props: {
