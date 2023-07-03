@@ -17,10 +17,6 @@ const Outer = styled.section`
   }
 `;
 
-const OuterFirst = styled(Outer)`
-  border-top: 1px solid #343434;
-`;
-
 const Right = styled.span`
   float: right;
 `;
@@ -32,9 +28,9 @@ const SidebarItem = (props: {
   const { name, href } = props;
 
   return (<Link {...{href}}>
-    <OuterFirst>
+    <Outer>
       {name}<Right>{'>'}</Right>
-    </OuterFirst>
+    </Outer>
   </Link>);
 };
 

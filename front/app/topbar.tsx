@@ -1,13 +1,8 @@
 import TopbarComponent from '../components/topbar';
-
-const links: { [key: string]: string } = {};
-links.Home = '/';
-links.Blog = '/blog';
-links.Styleguide = '/styleguide';
-links.GitHub = 'https://github.com/teddiewallie/tedwall.se';
+import items from '../models/topbar-items';
 
 const Topbar = () => (
-  <TopbarComponent {...{links}} />
+  <TopbarComponent {...{items}} />
 );
 
 export default Topbar;

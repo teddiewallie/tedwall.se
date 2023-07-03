@@ -4,9 +4,8 @@ import styled from 'styled-components';
 import SidebarItem from './sidebar-item';
 
 const Section = styled.section`
-  height: calc(100vh + 1px);
+  height: calc(100vh - 3.3em);
   position: relative;
-  top: -1px;
   background-color: #252525;
   border-right: 1px solid #343434;
   float: left;

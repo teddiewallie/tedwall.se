@@ -18,7 +18,7 @@ const Ul = styled.ul`
 
 const Li = styled.li`
   display: inline-block;
-  margin-left: 1em;
+  margin-left: 1.4em;
 `;
 
 const Entry = (props: {
@@ -40,12 +40,11 @@ const Entry = (props: {
   </Li>);
 };
 
-const TopBar = (props: { links: object }) => {
-  const { links } = props;
-  console.log(links);
+const TopBar = (props: { items: object }) => {
+  const { items } = props;
   const path = usePathname();
 
-  const Entries = Object.entries(links).map(([name, href], index) => (
+  const Entries = Object.entries(items).map(([name, href], index) => (
     <Entry key={`top-menu-${index}`} {...{name, href, path}} />
   ));
 
