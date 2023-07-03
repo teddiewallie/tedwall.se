@@ -13,19 +13,12 @@ const Section = styled.section`
 const Ul = styled.ul`
   list-style-type: none;
   margin: 0;
-  padding: 0.4em 0.8em 0.8em 0.8em;
+  padding: 1em;
 `;
 
 const Li = styled.li`
   display: inline-block;
   margin-left: 1em;
-`;
-
-const FirstLi = styled(Li)`
-  text-shadow: -1px -1px 1px #181818;
-  font-size: 1.7em;
-  position: relative;
-  top: 0.1em;
 `;
 
 const Entry = (props: {
@@ -57,7 +50,6 @@ const TopBar = (props: { links: object }) => {
 
   return(<Section>
     <Ul>
-      <FirstLi>{'>'}</FirstLi>
       {...Entries}
     </Ul>
   </Section>);
