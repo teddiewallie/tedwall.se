@@ -42,10 +42,15 @@ const Sidebar = (props: {
   items: object
 }) => {
   const { items } = props;
-  const [ isHidden, setHidden ] = useState(JSON.parse(localStorage.getItem('sidebar-is-hidden')) || false);
+
+  let isInitiallyHidden = typeof window === 'undefined'
+    ? 'false'
+    : localStorage.getItem('sidebar-is-hidden') || 'false';
+
+  const [ isHidden, setHidden ] = useState(JSON.parse(isInitiallyHidden));
 
   useEffect(() => {
-    localStorage.setItem('sidebar-is-hidden', JSON.stringify(isHidden));
+    localStorage && localStorage.setItem('sidebar-is-hidden', JSON.stringify(isHidden));
   }, [isHidden]);
 
   const SidebarItems = Object.entries(items).map(([name, href], index) => {
