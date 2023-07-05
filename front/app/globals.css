@@ -9,6 +9,14 @@ a {
   color: #ccc;
 }
 
+article {
+  min-width: 20em;
+  max-width: 40em;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  line-height: 1.6em;
+}
+
 .default-margin {
   margin: 2em;
 }

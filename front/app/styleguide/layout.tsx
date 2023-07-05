@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.section`
   display: flex;
+  flex-flow: row;
 `;
 
 const Content = styled.section`

@@ -1,9 +1,9 @@
 import './globals.css';
-import { Inter } from 'next/font/google';
+import { Signika } from 'next/font/google';
 import StyledComponentsRegistry from '../lib/styled-registry';
 import Topbar from './topbar';
 
-const inter = Inter({ subsets: ['latin'] });
+const defaultFont = Signika({ subsets: ['latin'] });
 
 const metadata = {
   title: 'tedwall.se',
@@ -17,7 +17,7 @@ const RootLayout = ({
 }) => {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={defaultFont.className}>
         <StyledComponentsRegistry>
           <Topbar />
           {children}
