@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 
 const Section = styled.section`
+  position: fixed;
+  top: -1px;
+  width: 100vw;
   background-color: #252525;
   border-bottom: 1px solid #343434;
   user-select: none;
@@ -53,11 +56,14 @@ const TopBar = (props: { items: object }) => {
     <Entry key={`top-menu-${index}`} {...{name, href, path}} />
   ));
 
-  return(<Section>
-    <Ul>
-      {...Entries}
-    </Ul>
-  </Section>);
+  return(<>
+    <section><Ul><Li>.</Li></Ul></section>
+    <Section>
+      <Ul>
+        {...Entries}
+      </Ul>
+    </Section>
+  </>);
 };
 
 export default TopBar;
