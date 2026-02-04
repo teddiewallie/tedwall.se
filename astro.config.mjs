@@ -11,15 +11,11 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/teddiewallie/tedwall.se' }],
 			sidebar: [
 				{
-					label: 'Guides',
+					label: 'Tutorials',
 					items: [
 						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
+						{ label: 'How to click on a guide', slug: 'guides/how-to-click-on-a-guide' },
 					],
-				},
-				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
 				},
 			],
 		}),
