@@ -1,0 +1,166 @@
+---
+title: Encrypted Arch Install
+description: A guide on how to click on guides.
+---
+
+import '../../../styles/fonts.css';
+
+
+## Pre stuff
+
+```
+loadkeys sv-latin1
+timedatectl
+```
+
+
+## Wifi
+
+```
+iw
+station wlan0 scan
+station wlan0 get-networks
+station wlan0 connect skynet
+exit
+```
+
+## Partition
+
+I ususally do:
+* `/boot` 1G - EFI
+* `/root` >40G - Linux Root
+* `/home` rest - Linux Home
+
+Also, I like `cfdisk` better than `fdisk`. Old habit.
+
+If I want to nuke the drive completely before I start, I do:
+
+```
+sudo dd if=/dev/urandom of=/dev/nvme0n1
+Ctrl+C
+```
+
+That way we corrupt the drive and trigger `cfdisk` to create a new partition table.
+
+```
+cfdisk /dev/nvme0n1
+```
+
+Now I usually have:
+* `/dev/nvme0n1p1` - 1G EFI
+* `/dev/nvme0n1p2` - >40G - Linux Root
+* `/dev/nvme0n1p3` - rest - Linux Home
+
+Default luks is good enough.
+
+## Format and Encrypt
+
+```
+mkfs.fat -F32 /dev/nvme0n1p1
+
+cryptsetup luksFormat /dev/nvme0n1p2
+cryptsetup luksFormat /dev/nvme0n1p3
+
+cryptsetup luksOpen /dev/nvme0n1p2 root
+cryptsetup luksOpen /dev/nvme0n1p3 home
+
+mkfs.ext4 /dev/mapper/root
+mkfs.ext4 /dev/mapper/home
+```
+
+## Mount
+
+```
+mount /dev/mapper/root /mnt
+
+mkdir /mnt/boot
+mount /dev/nvme0n1p1 /mnt/boot
+
+mkdir /mnt/home
+mount /dev/mapper/home /mnt/home
+```
+
+## Install and chroot
+
+```
+pacstrap -K /mnt base base-devel neovim tmux linux linux-firmware grub efibootmgr networkmanager sudo
+arch-chroot /mnt
+```
+
+## Configure
+
+```
+ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
+
+hwclock --systohc
+
+echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+locale-gen
+
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+echo "KEYMAP=sv-latin1" > /etc/console.conf
+echo "hostname" > /etc/hostname
+
+passwd
+
+useradd tewa
+passwd tewa
+mkhomedir_helper tewa
+
+EDITOR=nvim visudo # add myself
+
+systemctl enable NetworkManager
+```
+
+## mkinitcpio
+
+```
+nvim /etc/mkinitcpio
+
+HOOKS=(base systemd autodetect microcode modconf kms keyboard keymap sd-vconsole block sd-encrypt filesystems fsck)
+
+mkinitcpio -P
+```
+
+## fstab
+
+```
+lsblk -f | grep root >> /etc/fstab # now you have the UUID at the bottom of the file
+nvim /etc/fstab
+
+UUID=**UUID FROM BOTTOM OF FILE**      /      ext4      rw,relatime      0 1
+```
+
+## Crypt File and crypttab
+
+```
+dd bs=512 count=4 if=/dev/random iflag=fullblock | install -m 0600 /dev/stdin /etc/crypthome
+cryptsetup luksAddKey /dev/nvme0n1p3 /etc/crypthome
+cryptsetup luksRemoveKey /dev/nvme0n1p3
+
+lsblk -f | grep nvme0n1p2 >> /etc/crypttab # now you have the UUID at the bottom of the file
+nvim /etc/crypttab
+
+home      **UUID FROM BOTTOM OF FILE**     /etc/crypthome
+```
+
+## GRUB
+
+```
+lsblk -f | grep nvme0n1p2 >> /etc/default/grub # now you have the UUID at the bottom of the file
+nvim /etc/default/grub
+
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=**UUID FROM BOTTOM OF FILE**=root root=/dev/mapper/root"
+```
+
+Then install and make the config.
+
+```
+grub install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ARCH
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+## Done
+
+Then reboot and pray. Haven't had the chance to try this writeup out yet. Should work though.
+

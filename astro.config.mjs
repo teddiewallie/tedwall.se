@@ -11,10 +11,10 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/teddiewallie/tedwall.se' }],
 			sidebar: [
 				{
-					label: 'Tutorials',
+					label: 'Guides',
 					items: [
 						// Each item here is one entry in the navigation menu.
-						{ label: 'How to click on a guide', slug: 'guides/how-to-click-on-a-guide' },
+						{ label: 'Encrypted Arch Install', slug: 'guides/encrypted-arch-install' },
 					],
 				},
 			],
