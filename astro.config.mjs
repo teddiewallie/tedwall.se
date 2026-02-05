@@ -13,10 +13,16 @@ export default defineConfig({
 				{
 					label: 'Guides',
 					items: [
-						// Each item here is one entry in the navigation menu.
 						{ label: 'Encrypted Arch Install', slug: 'guides/encrypted-arch-install' },
 					],
+
 				},
+                {
+                    label: 'Outdoors',
+                    items: [
+                        { label: 'Gear', slug: 'outdoors/gear' },   
+                    ],
+                },
 			],
 		}),
 	],
