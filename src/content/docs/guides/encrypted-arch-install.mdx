@@ -84,6 +84,7 @@ mount /dev/mapper/home /mnt/home
 
 ```
 pacstrap -K /mnt base base-devel neovim tmux linux linux-firmware grub efibootmgr networkmanager sudo
+genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ```
 
