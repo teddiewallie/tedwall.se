@@ -17,12 +17,12 @@ export default defineConfig({
 					],
 
 				},
-                {
-                    label: 'Outdoors',
-                    items: [
-                        { label: 'Gear', slug: 'outdoors/gear' },   
-                    ],
-                },
+                // {
+                //     label: 'Outdoors',
+                //     items: [
+                //         { label: 'Gear', slug: 'outdoors/gear' },   
+                //     ],
+                // },
 			],
 		}),
 	],
