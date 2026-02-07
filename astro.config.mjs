@@ -14,6 +14,7 @@ export default defineConfig({
 					label: 'Guides',
 					items: [
 						{ label: 'Encrypted Arch Install', slug: 'guides/encrypted-arch-install' },
+						{ label: 'Markdown in nvim', slug: 'guides/markdown-in-nvim' },
 					],
 
 				},
