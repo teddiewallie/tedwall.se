@@ -21,9 +21,9 @@ I tried to like emacs for a while. I almost convinced myself that I did. But the
 
 There are two plugins I use for this. `nvim-mini/mini.icons` and `render-markdown.nvim`, both found on GitHub. If you use `vim.pack` you add them like this:
 
-```
+```lua
 vim.pack.add({
-    {src = 'https://github.com/nvim-mini/mini.icons'},
+    {src = 'ttps://github.com/nvim-mini/mini.icons'},
     {src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim'},
 });
 ```
@@ -34,7 +34,7 @@ vim.pack.add({
 
 So now we already have beautifully rendered markdown in neovim, but one thing org mode has that really marks the dot is folds. To be able to hide text behind a headline. Fear not, neovim has it built right into the core:
 
-```
+```lua
 vim.g.markdown_folding = 1
 vim.o.foldlevelstart = 1
 vim.o.foldlevel = 1
@@ -52,7 +52,7 @@ So now we have beautiful markdown documents that we can fold by headline. Neat! 
 
 And for that to work, I found out I need some hotkeys - mainly one that lets me cut a full section even when it's folded:
 
-```
+```lua
 map(NORMAL, SPACE .. 'dd', '', { callback = function()
     local fs = vim.fn.foldclosed(".")
     if fs ~= -1 then
@@ -76,7 +76,7 @@ So, regular simple fold is `za` by default, but I added it to just `Enter`. The 
 
 One more thing. I recently discovered that `mdx` is a file format. Just like `jsx` it's a file with extended abilites beyond what their original counterpart was used for. `jsx` allows HTML tags in the file, while `mdx` allows some imports and other stuff. But 95% of it is just markdown, so we could just pretend that it is.
 
-```
+```lua
 vim.filetype.add({
   extension = {
     mdx = "markdown",

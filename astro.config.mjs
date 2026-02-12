@@ -10,6 +10,7 @@ export default defineConfig({
 			title: 'Stuff on things',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/teddiewallie/tedwall.se' }],
 			sidebar: [
+                { label: 'Fleeting Thoughts', link: 'fleeting-thoughts' },
                 {
                     label: 'Writeups',
                     items: [

@@ -7,7 +7,7 @@ import '../../../styles/fonts.css';
 
 ## Pre stuff
 
-```
+```sh
 loadkeys sv-latin1
 timedatectl
 ```
@@ -15,7 +15,7 @@ timedatectl
 
 ## Wifi
 
-```
+```sh
 iw
 station wlan0 scan
 station wlan0 get-networks
@@ -34,14 +34,14 @@ Also, I like `cfdisk` better than `fdisk`. Old habit.
 
 If I want to nuke the drive completely before I start, I do:
 
-```
+```sh
 sudo dd if=/dev/urandom of=/dev/nvme0n1
 Ctrl+C
 ```
 
 That way we corrupt the drive and trigger `cfdisk` to create a new partition table.
 
-```
+```sh
 cfdisk /dev/nvme0n1
 ```
 
@@ -54,7 +54,7 @@ Default luks is good enough.
 
 ## Format and Encrypt
 
-```
+```sh
 mkfs.fat -F32 /dev/nvme0n1p1
 
 cryptsetup luksFormat /dev/nvme0n1p2
@@ -69,7 +69,7 @@ mkfs.ext4 /dev/mapper/home
 
 ## Mount
 
-```
+```sh
 mount /dev/mapper/root /mnt
 
 mkdir /mnt/boot
@@ -81,7 +81,7 @@ mount /dev/mapper/home /mnt/home
 
 ## Install and chroot
 
-```
+```sh
 pacstrap -K /mnt base base-devel neovim tmux linux linux-firmware grub efibootmgr networkmanager sudo
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
@@ -89,7 +89,7 @@ arch-chroot /mnt
 
 ## Configure
 
-```
+```sh
 ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime
 
 hwclock --systohc
@@ -114,7 +114,7 @@ systemctl enable NetworkManager
 
 ## mkinitcpio
 
-```
+```sh
 nvim /etc/mkinitcpio
 
 HOOKS=(base systemd autodetect microcode modconf kms keyboard keymap sd-vconsole block sd-encrypt filesystems fsck)
@@ -124,7 +124,7 @@ mkinitcpio -P
 
 ## fstab
 
-```
+```sh
 lsblk -f | grep root >> /etc/fstab # now you have the UUID at the bottom of the file
 nvim /etc/fstab
 
@@ -133,7 +133,7 @@ UUID=**UUID FROM BOTTOM OF FILE**      /      ext4      rw,relatime      0 1
 
 ## Crypt File and crypttab
 
-```
+```sh
 dd bs=512 count=4 if=/dev/random iflag=fullblock | install -m 0600 /dev/stdin /etc/crypthome
 cryptsetup luksAddKey /dev/nvme0n1p3 /etc/crypthome
 cryptsetup luksRemoveKey /dev/nvme0n1p3
@@ -146,7 +146,7 @@ home      **UUID FROM BOTTOM OF FILE**     /etc/crypthome
 
 ## GRUB
 
-```
+```sh
 lsblk -f | grep nvme0n1p2 >> /etc/default/grub # now you have the UUID at the bottom of the file
 nvim /etc/default/grub
 
@@ -155,7 +155,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=**UUID FROM BOTTOM OF 
 
 Then install and make the config.
 
-```
+```sh
 grub install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ARCH
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
