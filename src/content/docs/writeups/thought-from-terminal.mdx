@@ -32,9 +32,9 @@ function thought() {
 
     FULL="
 \`\`\`sh
-date +\"%Y-%m-%dT%H:%M:%S\"
+> date +\"%Y-%m-%dT%H:%M:%S\"
 $(date +'%Y-%m-%dT%H:%M:%S')
-cat thought
+> cat thought
 \"
 $THOUGHT
 \"
