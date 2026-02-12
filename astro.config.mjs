@@ -10,6 +10,12 @@ export default defineConfig({
 			title: 'Stuff on things',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/teddiewallie/tedwall.se' }],
 			sidebar: [
+                {
+                    label: 'Writeups',
+                    items: [
+                        { label: 'My Arch Mirror', slug: 'writeups/my-arch-mirror' },
+                    ],
+                },
 				{
 					label: 'Guides',
 					items: [

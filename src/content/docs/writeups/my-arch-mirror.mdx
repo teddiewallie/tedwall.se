@@ -1,0 +1,34 @@
+---
+title: My Arch Mirror
+description: This is how I run my Tier 2 Arch mirror
+---
+
+import { Image } from 'astro:assets';
+import '../../../styles/fonts.css';
+
+## Purpose
+
+Since I use Arch Linux on pretty much everything I own, I thought it would be beneficial to run my own private mirror. Then I moved in somewhere with a gigabit connection and thought *why not*. And here we are. Yeah, more or less the whole story.
+
+So in my wardrobe I have x86 router running Proxmox, and in Proxmox I run a virtual OPNSense. I use this setup because OPNSense doesn't require that much computing power or storage, so I had some juice left to run something else on it. And that's where I fired up, you guessed it, a virtual Arch installation that serves [https:/mirror.tedwall.se](https:/mirror.tedwall.se).
+
+## Git Repository
+
+If you want to run your own arch mirror and need a boilerplate on how to set up a tiny shell script in a docker container, then I have just the repository for you. My own! [https://github.com/teddiewallie/mirror.tedwall.se](https://github.com/teddiewallie/mirror.tedwall.se).
+
+It really isn't anything special. I have a `build` directory with a `Dockerfile` that fires up an Arch instance, then copies the `mirror.sh` script into it and then runs it.
+
+The `mirror.sh` has a loop in it that runs `rsync` towards a tier 1 mirror, updating the local mirror directory from it, then it goes to sleep for exactly 46 minutes, and then it loops. Why 46 minutes? Well, it's mostly for courtesy to the tier 1 mirror so that I don't `rsync` exactly the same time each hour, risking heavy traffic if more mirrors decides to do it exactly the same minute I do.
+
+The `docker-compose.yml` file tells docker compose to build it, run it and always restart it if it goes down for some reason. We also expose the mirror directory inside the container into a directory in the same place `docker-compose.yml` resides. This is for conveniency and for pointing to it from `nginx`.
+
+That's it really.
+
+## Mirror Status
+
+My mirror is listed on their website. You are able to check the status of it here: [https://archlinux.org/mirrors/tedwall.se/](https://archlinux.org/mirrors/tedwall.se/).
+
+## Any Traffic to It?
+
+Honestly no idea. I know I use it as my primary, wherever I am, so that's at least one user. I know I had a bunch when I checked the logs more frequently. I used to check the logs as a hawk in the beginning and tweaked both `nginx` and did some traffic piping in OPNSense, but when it ran smoothly, I just let it be. Since it is in the same Proxmox machine as my router, it goes down when the router does, which is when I update and restart stuff etc. But current uptime is 35 days, so I mean... Meh.
+
