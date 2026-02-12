@@ -1,0 +1,70 @@
+---
+title: My Keyboard Layout
+description: This is what I program on
+---
+
+import { Image } from 'astro:assets';
+import '../../../styles/fonts.css';
+
+## Purpose
+
+Some twelve years ago I developed a new interest that would, in lack of a better word, haunt me up until this day. I fell into the deep rabbit hole of building your own keyboards. I learned soldering, how microcontrollers work, how to flash them, `QMK Firmware`, difference between different switch types, keycap models and forms... The list is endless. While tinkering, I started getting more and more frustrated with the keyboard layout on computers that, sorry in advance, sucks ass and is nothing but a remnant from the days of typewriters. Who uses the 1/2 sign on a daily basis? The sun sign? Pound sign?I am a firm believer in that a keyboard layout only should contain what you use every day, the rest you can copy from somewhere twice every ten years or something.
+
+## The Rules
+
+So, I started developing my own keyboard layout with two goals in mind - make it easy to remember and make it easy to use. I've had many iterations of the layout, but a few years ago the pace stagnated and I haven't had the need to update it in forever. I had a few loose guidelines while developing it:
+
+1. Programming brackets should be grouped.
+2. Everything should be close to home row.
+3. Placement of special characters should be predictable where possible.
+4. We have AltGr. Use it.
+
+### Programming brackets should be grouped
+
+First one is self explanatory. You find the `<>`, `{}`, `[]`, `()` pairs on the keys next to each other. And you find all the brackets in the same place.
+
+### Everything should be close to home row
+
+Second one is pretty self explanatory too. No more `Shift+1` for `!`, and `AltGr+7` for `{`. No, it should all be as close to the home row as possible. Why? We don't want to move the fingers more than necessary, both for speed and for an ergonomic boost. Less risk for carpal tunnel syndrome.
+
+### Be predictable and use AltGr
+
+Third one and fourth one are a bit attached and they are a build on the second one. With *predictable* I mean *if you have never used this layout before, you should be able to guess where a character is in three tries*. How? Well, what does a `@` look like? An `a`, right? Well, put it on `AltGr+a` then! How about `$`? You guessed `S`? `AltGr+S` then. See? Easy peasy.
+
+Well, some are harder. `?` is `AltGr+O` for no real reason. But `!` is an upside down `i`, so we put it on `AltGr+i`, and you find `!?` next to each other, so `?` is on `o`. `/|\` is bottom left `AltGr+[z|x|c]`. `=` is on `AltGr+e` because **e**quals. Well, as I said, three tries. You might not get it first try, but definitely second or third until it sticks.
+
+The design assumes you use a keyboard with an ISO design; which means a two row enter key. It's easily adaptable to any layout, but it had the ISO in mind.
+
+## The Layout
+
+Here it is:
+
+```
+|-----|
+| 2 3 |   1 = Normal 2 = Shift 3 = Level3
+| 1   |   
+|-----|
+|--------------------------------------------------------------------------
+|    |' ' |` ` |    |    |    |    |    |    |    |    |  < |  > |   Back-|
+|    |1   |2   |3   |4   |5   |6   |7   |8   |9   |0   |(   |)   |  space |
+|--------------------------------------------------------------------------
+|      |Q % |W ~ |E = |R   |T + |Y   |U   |I ! |O ? |P   |Å { |^ } | Enter|
+|Tab   |q   |w   |e   |r   |t   |y   |u   |i   |o   |p   |å   |"   |      |
+|-------------------------------------------------------------------|     |
+|       |A @ |S $ |D   |F   |G & |H # |J   |K   |L   |Ö   |Ä [ |* ] |     |
+|Caps   |a   |s   |d   |f   |g   |h   |j   |k   |l   |ö   |ä   |'   |     |
+|-------------------------------------------------------------------------|
+|            |Z / |X | |C \ |V   |B   |N   |M   |;   |:   |_   |          |
+|Shift       |z   |x   |c   |v   |b   |n   |m   |,   |.   |-   |Shift     |
+|--------------------------------------------------------------------------
+|       |       |       |                          |       |       |      |
+|Ctrl   |Meta   |Alt    |          Space           |AltGr  |Menu   |Ctrl  |
+|--------------------------------------------------------------------------
+```
+
+## Repository
+
+Now I have installer files for Windows and an X11 file for linux. I had one for Mac as well, since I used it for work, but it disappeared. [Ukelele](https://software.sil.org/ukelele/) is easy to learn if you want to take a stab at it.
+
+Repo: [https://github.com/teddiewallie/se_prog](https://github.com/teddiewallie/se_prog)
+

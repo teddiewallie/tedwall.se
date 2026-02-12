@@ -14,6 +14,7 @@ export default defineConfig({
                 {
                     label: 'Writeups',
                     items: [
+                        { label: 'My Keyboard Layout', slug: 'writeups/my-keyboard-layout' },
                         { label: 'My Arch Mirror', slug: 'writeups/my-arch-mirror' },
                     ],
                 },
