@@ -1,0 +1,59 @@
+---
+title: Thought from Terminal
+description: I can add a thought from the terminal!
+---
+
+import { Image } from 'astro:assets';
+import '../../../styles/fonts.css';
+
+## Purpose
+
+So I added a section of the webpage where I can add [fleeting thoughts](/fleeting-thoughts) in tiny bubble. Just like a former blue website. Then I thought *huh, wouldn't it be swell to be able to do this from the terminal?*
+
+Then the thought became a tiny function in my `.zshrc`. And now I can shoot thoughts straight from the terminal right into my website. How cool is that?
+
+## How?
+
+I built up the string's static parts and used `cat` to grab a multiline string for the thought. Then I added an empty `<div>` on the page to be able to determine where to add the new thought, then I used `awk` to find that anchor and add lines below it. Lastly I opened a subshell, `cd` into the directory, added the thought to the file and did the whole `git add commit push` thing. Then GitHub takes over, rebuilding the site and presto, a fresh thought!
+
+### Code
+
+The code is ugly, but whatever. Here it is:
+
+```zsh
+function thought() {
+    echo "End with Ctrl+D twice\n\n"
+
+    THOUGHT="$(cat)"
+
+    echo ""
+
+    FULL="
+\`\`\`sh
+date +\"%Y-%m-%dT%H:%M:%S\"
+$(date +'%Y-%m-%dT%H:%M:%S')
+cat thought
+\"
+$THOUGHT
+\"
+\`\`\`
+"
+
+    (
+        cd ~/tedwall.se/src/content/docs
+
+        awk -v insert="$FULL" '
+        /hidden-anchor-for-start-of-thoughts/ {
+            print
+            print insert
+            next
+        }
+        1
+        ' fleeting-thoughts.mdx > tmp && mv tmp fleeting-thoughts.mdx
+
+        git add .
+        git commit -am $(date +'%Y-%m-%dT%H:%M:%S')
+        git push
+    )
+}
+```
