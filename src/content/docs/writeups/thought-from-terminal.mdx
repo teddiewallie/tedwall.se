@@ -21,9 +21,9 @@ I built up the string's static parts and used `cat` to grab a multiline string f
 The code is ugly, but whatever. Here it is:
 
 ```zsh
-function thought() {
+function thought() {  
     echo "End with Ctrl+D twice\n\n"
-
+    echo "----------------------------------------------------------------------"
     THOUGHT="$(cat)"
 
     echo ""
@@ -41,6 +41,7 @@ $THOUGHT
 
     (
         cd ~/tedwall.se/src/content/docs
+        git pull
 
         awk -v insert="$FULL" '
         /hidden-anchor-for-start-of-thoughts/ {
