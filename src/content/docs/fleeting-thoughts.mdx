@@ -7,6 +7,8 @@ description: Who needs Twitter anyway?
 import { Image } from 'astro:assets';
 import '../../styles/fonts.css';
 
+import deconstructed from '../images/deconstructed.jpg';
+
 ## Purpose
 
 Sometimes I just want to throw something sticky on a wall and see it roll down slowly. This is the place for that.
@@ -14,6 +16,13 @@ Sometimes I just want to throw something sticky on a wall and see it roll down s
 ---
 
 <div id="hidden-anchor-for-start-of-thoughts" />
+
+<div style="text-align: center">
+<p>2026-02-17 17:02</p>
+<p>*Deconstructed hetvägg*</p>
+<p>Because fettisdag :D</p>
+<Image src={deconstructed} alt="Deconstructed hetvägg." />
+</div>
 
 ```sh
 > date +"%Y-%m-%dT%H:%M:%S"
