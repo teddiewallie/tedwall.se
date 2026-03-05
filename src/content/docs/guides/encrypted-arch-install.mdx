@@ -20,7 +20,7 @@ timedatectl
 ## Wifi
 
 ```sh
-iw
+iwctl
 station wlan0 scan
 station wlan0 get-networks
 station wlan0 connect skynet
@@ -130,9 +130,11 @@ mkinitcpio -P
 
 ```sh
 lsblk -f | grep root >> /etc/fstab # now you have the UUID at the bottom of the file
+lsblk -f | grep home >> /etc/fstab # now you have the UUID at the bottom of the file
 nvim /etc/fstab
 
-UUID=**UUID FROM BOTTOM OF FILE**      /      ext4      rw,relatime      0 1
+UUID=**ROOT UUID FROM BOTTOM OF FILE**      /      ext4      rw,relatime      0 1
+UUID=**HOME UUID FROM BOTTOM OF FILE**      /      ext4      rw,relatime      0 1
 ```
 
 ## Crypt File and crypttab
@@ -142,7 +144,7 @@ dd bs=512 count=4 if=/dev/random iflag=fullblock | install -m 0600 /dev/stdin /e
 cryptsetup luksAddKey /dev/nvme0n1p3 /etc/crypthome
 cryptsetup luksRemoveKey /dev/nvme0n1p3
 
-lsblk -f | grep nvme0n1p2 >> /etc/crypttab # now you have the UUID at the bottom of the file
+lsblk -f | grep nvme0n1p3 >> /etc/crypttab # now you have the UUID at the bottom of the file
 nvim /etc/crypttab
 
 home      **UUID FROM BOTTOM OF FILE**     /etc/crypthome
