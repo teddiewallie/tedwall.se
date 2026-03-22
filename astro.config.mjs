@@ -17,6 +17,7 @@ export default defineConfig({
                         { label: 'Thought from Terminal', slug: 'writeups/thought-from-terminal' },
                         { label: 'My Keyboard Layout', slug: 'writeups/my-keyboard-layout' },
                         { label: 'My Arch Mirror', slug: 'writeups/my-arch-mirror' },
+                        { label: 'Local Documentation', slug 'writeups/local-documentation' },
                     ],
                 },
 				{
