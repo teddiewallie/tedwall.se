@@ -10,11 +10,11 @@ export default defineConfig({
 			title: 'Stuff on things',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/teddiewallie/tedwall.se' }],
 			sidebar: [
-                { label: 'Fleeting Thoughts', link: 'fleeting-thoughts' },
+                // { label: 'Fleeting Thoughts', link: 'fleeting-thoughts' },
                 {
                     label: 'Writeups',
                     items: [
-                        { label: 'Thought from Terminal', slug: 'writeups/thought-from-terminal' },
+                        // { label: 'Thought from Terminal', slug: 'writeups/thought-from-terminal' },
                         { label: 'My Keyboard Layout', slug: 'writeups/my-keyboard-layout' },
                         { label: 'My Arch Mirror', slug: 'writeups/my-arch-mirror' },
                         { label: 'Local Documentation', slug: 'writeups/local-documentation' },
